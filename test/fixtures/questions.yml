@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text: MyString
+  no_value: 1
+  yes_value: 1
+  block_id: 
+
+two:
+  text: MyString
+  no_value: 1
+  yes_value: 1
+  block_id: 

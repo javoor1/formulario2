@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @block.name %>
+</p>
+
+<p>
+  <strong>Treshold1:</strong>
+  <%= @block.treshold1 %>
+</p>
+
+<p>
+  <strong>Treshold2:</strong>
+  <%= @block.treshold2 %>
+</p>
+
+<%= link_to 'Edit', edit_block_path(@block) %> |
+<%= link_to 'Back', blocks_path %>
