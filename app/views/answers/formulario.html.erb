@@ -1,0 +1,90 @@
+<div class= "jumbotron">
+    
+    <h1 id="grupo" >¿Empezar cuestionario? </h1>
+    <p id= "pregunta">Vacío</p>
+    
+    
+    <%= javascript_tag do %>
+        
+        // Guardar respuesta, cargar siguiente pregunta y finalizar el cuestionario
+        function siguienteP(value) {
+            //Añadir respuesta
+            gon.answers.push([value, gon.questionsB[gon.counterQ].id]);
+            
+            //¿Hay otra pregunta en este bloque?
+            if (gon.counterQ + 1 < gon.questionsB.length) {
+            
+                //Mostrar la siguiente pregunta
+                gon.counterQ = gon.counterQ + 1;
+                desplegarP();
+            
+            //¿Hay otro bloque?
+            } else if (gon.counter+1 < gon.blocks.length) {
+            
+                //Cargar siguiente bloque y preguntas
+                gon.counter = gon.counter + 1;
+                gon.counterQ = 0;
+                gon.questionsB = get_questions(gon.blocks[gon.counter].id);
+                desplegarP();
+            
+            //Finalizar
+            } else {
+            
+                document.getElementById('grupo').innerHTML = "FIN";
+                document.getElementById('pregunta').innerHTML = " Ha terminado el questionario. ";
+                
+                //Quitar botones y añadir botón de submit
+                document.getElementById('b1').setAttribute( "style", "display: none");
+                document.getElementById('b2').setAttribute( "style", "display: none");
+                document.getElementById('b3').setAttribute( "style", "display: inline");
+            }
+            
+        };
+    
+        // Enviar datos del questionario a ser guardados  
+        function guardar() {
+        
+            $.post('/ajax/guardar.json', {
+                 respuestas: gon.answers,
+                 user: gon.user
+            }, function(data) {
+                 var output = data.result;
+            });
+        }
+        
+        function empezar() {
+        
+        //Desplegar la primera pregunta
+        gon.questionsB = get_questions(gon.blocks[gon.counter].id)
+        desplegarP();
+
+        //Modificar botones
+        document.getElementById('b0').setAttribute( "style", "display: none");
+        document.getElementById('b1').setAttribute( "style", "display: inline");
+        document.getElementById('b2').setAttribute( "style", "display: inline");
+        
+        }
+        
+        //Desplegar pregunta
+        function desplegarP(){
+        document.getElementById('grupo').innerHTML = gon.blocks[gon.counter].name;
+        document.getElementById('pregunta').innerHTML = gon.questionsB[gon.counterQ].text;
+        }
+        
+        //Cargar preguntas por bloque
+        function get_questions(id){
+            var filterd = gon.questions.filter( function(x) { return x.block_id === id })
+            return filterd
+        }
+        
+    <% end %>
+    
+    <input class="btn btn-primary btn-lg" type="button" value="Empezar" style= "display: inline" id="b0" onclick="empezar();"/>
+    <input class="btn btn-success btn-lg" type="button" value="Sí" style= "display: none" id="b1" onclick="siguienteP(this.value);"/>
+    <input class="btn btn-danger btn-lg" type="button" value="No"  style= "display: none" id="b2" onclick="siguienteP(this.value);"/>
+
+    <%= link_to "Ver resultados", resultados_path(:user => @user), 
+               :onclick => 'guardar()',
+               class: "btn btn-primary btn-lg", role: "button", id: "b3", style: "display: none"%>
+                        
+</div>

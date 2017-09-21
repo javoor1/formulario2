@@ -60,6 +60,54 @@ class AnswersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def formulario
+    
+    gon.questions = Question.all
+    gon.questionsB = []  #Preguntas por bloque
+    gon.blocks = []
+    #Cagar solamente los bloques que tienen preguntas
+    for b in Block.all
+      if b.questions.empty?
+        
+      else
+        
+        gon.blocks.push(b)
+        
+      end
+    
+    end
+    
+    gon.counter = 0 #Contador de bloque
+    gon.counterQ = 0 #Contador de preguntas
+    gon.answers = []
+    gon.user = params[:u_id]
+    @user = params[:u_id]
+
+  end
+  
+  def guardar #Guardar respuestas
+    respuestas = params["respuestas"]
+    user_id = params["user"]
+    for r in respuestas
+    
+      question_id = r[1][1].to_i
+      
+      if r[1][0] === 'No'
+        text = false
+      else
+        text = true
+      end 
+      
+      @ans = Answer.create(text: text, question_id: question_id, user_id: user_id)
+
+    end
+
+    respond_to do |format|
+          format.json {render :json => {:result => result}}
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

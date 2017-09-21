@@ -3,6 +3,13 @@ Rails.application.routes.draw do
   resources :questions
   resources :blocks
   resources :users
+  
+  
+  root 'pages#index'
+  get 'registro', to: 'pages#registro'
+  get 'resultados', to: 'pages#resultados'
+  get 'msev', to: 'answers#formulario'
+  post '/ajax/guardar' => 'answers#guardar'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
