@@ -102,10 +102,7 @@ class AnswersController < ApplicationController
       @ans = Answer.create(text: text, question_id: question_id, user_id: user_id)
 
     end
-
-    respond_to do |format|
-          format.json {render :json => {:result => result}}
-    end
+    
   end
 
 

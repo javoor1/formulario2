@@ -1,8 +1,7 @@
-<div class= "jumbotron">
+<div class= "jumbotron jumbo">
     
-    <h1 id="grupo" >¿Empezar cuestionario? </h1>
-    <p id= "pregunta">Vacío</p>
-    
+    <h1 id="grupo" class ="center" >¿Empezar cuestionario? </h1>
+    <p id= "pregunta" class="center big"> </p>
     
     <%= javascript_tag do %>
         
@@ -79,16 +78,16 @@
         
     <% end %>
     
-    <input class="btn btn-primary btn-lg" type="button" value="Empezar" style= "display: inline" id="b0" onclick="empezar();"/>
-    <input class="btn btn-success btn-lg" type="button" value="Sí" style= "display: none" id="b1" onclick="siguienteP(this.value);"/>
-    <input class="btn btn-danger btn-lg" type="button" value="No"  style= "display: none" id="b2" onclick="siguienteP(this.value);"/>
-
-    <%= link_to "Ver resultados", resultados_path(:user => @user), 
-               :onclick => 'guardar()',
-               class: "btn btn-primary btn-lg", role: "button", id: "b3", style: "display: none"%>
-                        
+    <div class = "center"> 
+        <input class="btn btn-primary btn-lg" type="button" value="Empezar" style= "display: inline" id="b0" onclick="empezar();"/>
+        <input class="btn btn-success btn-lg" type="button" value="Sí" style= "display: none" id="b1" onclick="siguienteP(this.value);"/>
+        <input class="btn btn-danger btn-lg" type="button" value="No"  style= "display: none" id="b2" onclick="siguienteP(this.value);"/>
+        <%= link_to "Ver resultados", resultados_path(:user => @user), 
+                   :onclick => 'guardar()',
+                   class: "btn btn-primary btn-lg", role: "button", id: "b3", style: "display: none"%>
+    </div>                  
 </div>
 
-<div class="col-xs-4 col-xs-offset-4">
+<div class="center">
     [ <%= link_to "Cancelar y regresar", root_path %> ]
 </div>

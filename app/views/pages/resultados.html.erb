@@ -1,8 +1,18 @@
-<h1 class= "center"> Resultados </h1>
+<div class= "jumbotron jumbo">
+    <div>
+        <h1 class= "center"> Resultados </h1>
+    </div>
 
 
-<% @sumas.each do |resultado| %>
-
-<div class= "<%= resultado[1]%>" role= "alert" > <%=resultado[0]%> </div>
-
-<% end %> 
+    <% @sumas.each do |resultado| %>
+    
+        <div class= "<%= resultado[1]%>" role= "alert" >
+            <h3 class ="center "><%=resultado[0]%></h1>
+        </div>
+    
+    <% end %> 
+    
+</div>
+<div class="center">
+    [ <%= link_to "Regresar a la página principal", root_path %> ]
+</div>

@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     
         if @user.save
             #redirect_to msev_path
-            redirect_to controller: 'answers', action: 'formulario', u_id: @user.id, something: 'else'
+            redirect_to controller: 'answers', action: 'formulario', u_id: @user.id
         else
           render :registro
         end

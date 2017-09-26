@@ -14,12 +14,13 @@
   </thead>
 
   <tbody>
+    <%= will_paginate %>
     <% @questions.each do |question| %>
       <tr>
         <td><%= question.text %></td>
         <td><%= question.no_value %></td>
         <td><%= question.yes_value %></td>
-        <td><%= question.block %></td>
+        <td><%= question.block.id %></td>
         <td><%= link_to 'Show', question %></td>
         <td><%= link_to 'Edit', edit_question_path(question) %></td>
         <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
