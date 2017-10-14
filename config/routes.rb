@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   resources :users
   
   
-  root 'pages#index'
+  root 'home#index'
+  get 'index', to: 'pages#index'
   get 'registro', to: 'pages#registro'
   get 'resultados', to: 'pages#resultados'
   get 'msev', to: 'answers#formulario'
